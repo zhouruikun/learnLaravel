@@ -51,3 +51,16 @@ Route::group(['prefix' => 'menber'],function (){
 Route::get('test', 'StudentController@test1');
 Route::get('query', 'StudentController@query5');
 Route::get('orm', 'StudentController@orm2');
+Route::any('session1', 'StudentController@session1');
+Route::group(['middleware' => ['web']],function()
+{
+    Route::any('session2', 'StudentController@session2');
+    Route::any('request', 'StudentController@request1');
+});
+Route::any('response', 'StudentController@response');
+Route::group(['middleware' => ['activity']],function()
+{
+    Route::any('activity1', 'StudentController@activity1');
+    Route::any('activity2', 'StudentController@activity2');
+});
+Route::any('activity0', 'StudentController@activity0');

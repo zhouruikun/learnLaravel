@@ -3,6 +3,8 @@ namespace App\http\Controllers;
 
 use App\Student;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class StudentController extends Controller
 {
@@ -104,5 +106,62 @@ class StudentController extends Controller
             ['name'=>'2211','age'=>22]
         );
         dd($students);
+    }
+
+    public function  request1(Request $request){
+                //1.取值
+                   // echo $request->input('name');
+                    //echo $request->input('namae',"weizhi");
+/*        if($request->has('name'))
+        {
+            echo $request->input('name');
+        }
+        else
+        {
+            echo '无参数';
+        }*/
+       // dd( $request->all());
+        //2.判断请求类型
+        echo  $request->url();
+    }
+    public function session1(Request $request){
+        //1
+//          $request->session()->put('key1','velue1');
+//        echo $request->session()->get('key1');
+//        Session::put('key2','velue2');
+//        echo  Session::get('key2');
+      //  session()->put('key3','velue3');
+     //   echo session()->get('key3');
+//        Session::push('student','zk');
+//        Session::push('student','zk2');
+//        $res= Session::all();
+//        dd($res);
+        //session()->forget('key1');
+        session()->flush();
+        Session::flash('key_flash','value_flash');
+    }
+    public function session2(Request $request){
+        echo Session::get('message','nodata');
+
+    }
+    public function response(){
+//        $data = [
+//            'errCode' => 0,
+//            'errMsg' => 'success',
+//            'name' => 'zhoukun',
+//            ];
+//        return response()->json($data);
+    //    return redirect('session2')->with('message','shuju');
+//    return redirect()->action('StudentController@session2')->with('message','shuju');
+    return redirect()->back();
+   }
+    public function activity0(){
+        return '活动快要开始了 敬请期待';
+    }
+    public function activity1(){
+        return '活动开始了 敬请期待';
+    }
+    public function activity2(){
+        return '活动借宿';
     }
 }
